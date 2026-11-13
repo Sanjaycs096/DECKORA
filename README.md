@@ -1,64 +1,135 @@
-# DECKORA
+<div align="center">
 
-> **Your Personal Browser Workspace.**
+<img src="public/brand/deckora-logo-horizontal.svg" alt="DECKORA — Your Personal Browser Workspace" width="460" />
+
+<p align="center">
+  <strong>Your Personal Browser Workspace.</strong><br />
+  A high-performance, privacy-first Google Chrome New Tab extension with an interactive canvas engine, recursive nested bookmarks navigation, and real-time internet speed monitoring.
+</p>
 
 [![CI](https://github.com/Sanjaycs096/DECKORA/actions/workflows/ci.yml/badge.svg)](https://github.com/Sanjaycs096/DECKORA/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Chrome MV3](https://img.shields.io/badge/Manifest-V3-success.svg)](public/manifest.json)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-informational.svg)](tsconfig.json)
+[![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-38bdf8.svg)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-818cf8.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/Sanjaycs096/DECKORA?style=flat&color=38bdf8)](https://github.com/Sanjaycs096/DECKORA/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/Sanjaycs096/DECKORA?style=flat&color=818cf8)](https://github.com/Sanjaycs096/DECKORA/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/Sanjaycs096/DECKORA?style=flat&color=60a5fa)](https://github.com/Sanjaycs096/DECKORA/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/Sanjaycs096/DECKORA?style=flat&color=94a3b8)](https://github.com/Sanjaycs096/DECKORA/commits/main)
+
+[**Quickstart Installation**](#11-installation) • [**Feature Tour**](#4-key-features) • [**Architecture**](#9-architecture-overview) • [**Screenshots**](#7-screenshots-gallery) • [**Changelog**](CHANGELOG.md)
+
+</div>
 
 ---
 
-## 1. Project Title
+## 1. Hero and Brand Introduction
 
-**DECKORA**
+**DECKORA** reimagines Google Chrome's blank New Tab page into an empowering personal command center. Built from scratch with React 19, TypeScript, and Chrome Extension Manifest V3, DECKORA unites precision spatial layout with the luminous elegance of the Royal Crystal design system.
 
-## 2. Tagline
-
-_Your Personal Browser Workspace._
-
-## 3. Professional Introduction
-
-**DECKORA** is an open-source, local-first personal browser workspace built as a Google Chrome Extension using Manifest V3 (`chrome_url_overrides.newtab`). DECKORA transforms Chrome's standard blank New Tab viewport into an elegant, spatial dashboard featuring an interactive freeform canvas, live timekeeping, multi-engine search, custom shortcuts, opt-in network speed monitoring, rich media integration, and an adaptive Royal Crystal design system.
-
-> **Important Boundary Clarification:** DECKORA is strictly a **Chrome New Tab page replacement**. In accordance with Chrome Extension Manifest V3 security boundaries, DECKORA does not—and cannot—modify, restyle, or override Chrome's native browser chrome (the top browser toolbar, omnibox, native tab bar, or browser-level settings). DECKORA lives entirely within the web page viewport of newly opened tabs.
+> **Chrome MV3 Scope Notice:** In accordance with Google Chrome Manifest V3 extension boundaries (`chrome_url_overrides.newtab`), DECKORA operates strictly within the page viewport of newly opened tabs. It does not alter Chrome's native browser frame, address omnibox, or operating system window decorations.
 
 ---
 
-## 4. Screenshots & Brand Media
+## 2. Product Overview
 
-_Brand assets and promotional artwork are available under [`public/brand/`](public/brand/):_
+Traditional new tab extensions force you into rigid grid templates or collect tracking data on every click. **DECKORA is local-first, privacy-respecting, and completely customizable**:
 
-| Asset                       | Preview                                         | Description                                                           |
-| :-------------------------- | :---------------------------------------------- | :-------------------------------------------------------------------- |
-| **DECKORA Horizontal Logo** | `public/brand/deckora-logo-horizontal.svg`      | Primary brand lockup with layered diamond mark and Manrope typography |
-| **DECKORA Vector Symbol**   | `public/brand/deckora-symbol.svg`               | Multi-plane geometric diamond crystal mark                            |
-| **Light Theme Wordmark**    | `public/brand/deckora-logo-light.svg`           | High-contrast mark optimized for light workspace backgrounds          |
-| **Marquee Artwork**         | `public/brand/deckora-cws-marquee-1400x560.svg` | 1400×560 Royal Crystal workspace showcase art                         |
-| **Promo Tile**              | `public/brand/deckora-cws-promo-440x280.svg`    | 440×280 visual tile for extension overview                            |
-
-_(Live screenshots of custom user workspaces can be placed in `docs/screenshots/`.)_
+- **Dual-Mode Workflow:** Toggle seamlessly between focused, clean **Browse Mode** and comprehensive **Master Edit Mode**.
+- **Interactive Freeform Canvas:** Drag, resize, align, and group widgets on a sub-pixel layout grid with magnetic snapping guides.
+- **Hierarchical Bookmarks:** Browse your entire Chrome bookmark collection through recursive cascading hover flyouts down to any depth.
+- **Real-Time Network Diagnostics:** Measure download speed, upload speed, ping latency, and jitter with on-demand testing.
+- **Isolated Workspace Profiles:** Maintain separate workspaces for Personal, Work, Research, and Creative focus contexts.
+- **Zero Remote Dependencies:** Zero tracking analytics, zero external CDNs, and zero cloud accounts. All data resides safely on your device.
 
 ---
 
-## 5. Feature Overview
+## 3. Main Workspace Preview
 
-- **Spatial Interactive Canvas:** Freeform canvas stage with drag-and-drop, fluid pointer resizing, multi-element marquee selection, smart snapping alignment guides, and z-index layer reordering.
-- **Transactional Master Edit Mode:** Comprehensive design environment supporting dirty-state tracking, Discard vs. Save confirmation, unbounded Undo/Redo (`Ctrl+Z` / `Ctrl+Y`), and hotkey shortcuts.
-- **Minimal 5-Control View Header:** Uncluttered top navigation housing strictly Bookmarks and Gmail (left) alongside Workspace Profiles, Edit Workspace, and the Google Apps launcher popover (right).
-- **Bookmarks Sidebar & Flyout:** Left-side dynamic folder drawer with recursive item counts, hover/click adjacent flyouts, nested subfolder navigation, and tree search (requires explicit opt-in `bookmarks` permission; falls back gracefully to curated local bookmarks).
-- **Multi-Engine Search Bar:** Instant web search across Google, DuckDuckGo, Bing, GitHub, and YouTube, with configurable privacy options and opt-in search suggestions.
-- **Customizable Shortcuts Grid:** Highly configurable quick-access links supporting horizontal and vertical layouts, custom URLs, automatic favicon resolution via Chrome's native favicon service, and modal editing.
-- **Opt-In Internet Speed Monitor:** On-demand and schedule-based ping, jitter, download, and upload measurement powered by bounded Cloudflare CDN endpoints (zero telemetry; requires explicit user opt-in for host access).
-- **Rich Media & Custom Text:** Binary IndexedDB-backed custom image and animated GIF objects with aspect-ratio locking, alongside typography-styled freeform text elements.
-- **Adaptive Royal Crystal Theme Studio:** Dark, Light, and System appearance modes, paired with dynamic color extraction from custom wallpapers, backdrop blur scrims, and curated royal color accents.
-- **Workspace Profiles & Portability:** Create multiple independent workspace profiles (e.g. Work, Focus, Minimalist) and seamlessly export/import complete configurations using `.deckora-bundle.zip` (with full backward compatibility for `.aurora-bundle.zip`).
+<div align="center">
+  <img src="docs/screenshots/deckora-workspace-1280x800.png" alt="DECKORA Main Workspace" width="100%" />
+  <p><em>DECKORA default New Tab workspace in Royal Crystal dark theme featuring live clock, multi-engine search, quick shortcuts, and speed monitor widget.</em></p>
+</div>
 
 ---
 
-## 6. Architecture Overview
+## 4. Key Features
 
-DECKORA adheres to a modern, decoupled, reactive architecture:
+- **Spatial Freeform Canvas:** Position any widget anywhere on screen. Supports marquee multi-selection, alignment guides, depth layering, and locking.
+- **Transactional History Engine:** Full undo/redo (`Ctrl+Z` / `Ctrl+Y`) transaction stack with atomic Save vs. Discard confirmation dialogs.
+- **Recursive Cascading Bookmarks:** Left-docked folder sidebar with cascading hover flyouts, breadcrumb jumps, and keyboard navigation.
+- **Smart Multi-Engine Search:** Switch between Google, DuckDuckGo, and Bing with instant `/` key focus and local suggestion history.
+- **Customizable Shortcuts Grid:** Flexible 8-slot quick link deck with automatic high-resolution favicon resolution via Chrome's native favicon provider.
+- **Internet Speed Monitor:** Client-side network measurement powered by bounded Cloudflare CDN endpoints with zero telemetry.
+- **Media & Custom Text Objects:** Upload images, animated GIFs, or typography cards stored securely in browser IndexedDB.
+- **Wallpaper & Background Studio:** Curated Royal Crystal gradients, custom solid palettes, backdrop blur, dim scrims, and vignette overlays.
+- **Multi-Profile Management:** Create, duplicate, and switch across unlimited workspace profiles (Personal, Work, Study, Minimal, Creative, Custom).
+- **Portable JSON/ZIP Backup:** One-click export and import of `.deckora-bundle.zip` files with magic-byte security inspection.
+
+---
+
+## 5. Nested Bookmarks Demonstration
+
+<div align="center">
+  <img src="docs/screenshots/deckora-nested-bookmarks.png" alt="DECKORA Recursive Nested Bookmarks Flyout" width="100%" />
+  <p><em>Recursive cascading folder navigation across multiple nested levels (Development → Frontend → Learning & Tutorials) with active breadcrumb tracking and keyboard accessibility.</em></p>
+</div>
+
+### Recursive Navigation Highlights
+
+- **Arbitrary Depth:** Navigate deep folder hierarchies without artificial level limits.
+- **Smooth Pointer Bridges:** Intelligent grace timers prevent flyouts from closing during diagonal mouse movement.
+- **Sibling Hover Switching:** Hovering a sibling immediately swaps the active branch without leaving ghost panels.
+- **Keyboard & Touch Ready:** Full support for `ArrowRight`, `ArrowLeft`, `Enter`, `Escape`, and mobile touch taps.
+- **Privacy First:** If optional Chrome `bookmarks` permission is not granted, DECKORA maintains local curated profile links.
+
+---
+
+## 6. Edit Mode Demonstration
+
+<div align="center">
+  <img src="docs/screenshots/deckora-edit-mode.png" alt="DECKORA Master Edit Mode" width="100%" />
+  <p><em>Master Edit Mode with top editing toolbar, canvas transformation bounding boxes, Layers panel (left), and Properties Inspector (right).</em></p>
+</div>
+
+### Edit Mode Capabilities
+
+- **Direct Manipulation:** Drag widgets freely or resize with proportional corner handles.
+- **Layers Panel:** Inspect visual z-index stack, toggle element visibility, and lock background elements from accidental edits.
+- **Inspector Panel:** Configure sub-pixel grid spacing (8px, 12px, 16px, 24px), toggle alignment guides, and manage themes.
+- **Safety First:** Unsaved changes prompt an explicit Discard/Save confirmation before exiting.
+
+---
+
+## 7. Screenshots Gallery
+
+<div align="center">
+
+|                                     Bookmarks Drawer                                     |                                    Workspace Profiles                                    |
+| :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img src="docs/screenshots/deckora-bookmarks.png" width="480" alt="Bookmarks Drawer" />  | <img src="docs/screenshots/deckora-profiles.png" width="480" alt="Workspace Profiles" /> |
+|                            **Wallpaper & Appearance Studio**                             |                              **Add Image & Media Elements**                              |
+| <img src="docs/screenshots/deckora-appearance.png" width="480" alt="Wallpaper Studio" /> |    <img src="docs/screenshots/deckora-media.png" width="480" alt="Media Elements" />     |
+
+</div>
+
+---
+
+## 8. Technology Stack
+
+- **Platform:** Google Chrome Extension Manifest V3 (`chrome_url_overrides.newtab`)
+- **Core Framework:** React 19, TypeScript 5.9 (Strict mode enabled)
+- **Bundler & Tooling:** Vite 8, Rollup, PostCSS
+- **Styling Architecture:** Tailwind CSS v4, CSS Variables, Royal Crystal design tokens
+- **UI Components:** Radix UI primitives (`@radix-ui/react-dialog`, `@radix-ui/react-dropdown-menu`, `@radix-ui/react-slider`, `@radix-ui/react-switch`, `@radix-ui/react-tabs`, `@radix-ui/react-tooltip`)
+- **Iconography:** Google Material Symbols Rounded (`@fontsource-variable/material-symbols-rounded`) exclusively
+- **Typography:** Inter Variable (`@fontsource-variable/inter`), Manrope Variable (`@fontsource-variable/manrope`)
+- **State & Immutability:** Zustand 5, Immer 10
+- **Schema Validation:** Zod 4
+- **Client Storage:** IndexedDB (`idb` v8) and Chrome Storage API (`@types/chrome`)
+- **Quality & Testing:** Vitest 4, `@testing-library/react`, ESLint 9, Prettier 3
+
+---
+
+## 9. Architecture Overview
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -94,50 +165,27 @@ DECKORA adheres to a modern, decoupled, reactive architecture:
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **View Layer:** High-performance React 19 functional components styled using Tailwind CSS v4 and Radix UI primitives.
-2. **State Layer:** Zustand stores using Immer for immutable updates. The editor features a decoupled session store (`editorSessionStore`) that isolates in-flight edits from persisted state until explicitly saved.
-3. **Data & Storage Layer:** Two-tier local storage architecture:
-   - `chrome.storage.local`: Lightweight, structured JSON schema storing workspace layouts, profile definitions, widget configurations, and user preferences.
-   - `IndexedDB` (`aurora-assets-db`): High-capacity transactional object store storing wallpapers, custom fonts, images, and animated GIFs as raw binary `Blob` objects.
+1. **View Layer:** Declarative React 19 tree rendered within standard browser frame boundaries.
+2. **Session Isolation:** `editorSessionStore` clones workspace state into an active editing draft, ensuring in-flight adjustments never corrupt persistent data until committed.
+3. **Storage Tiering:**
+   - `chrome.storage.local`: Fast JSON storage for workspace metadata and layout configurations.
+   - `IndexedDB` (`aurora-assets-db`): High-capacity local binary storage for wallpapers, uploaded pictures, and animated GIFs.
 
 ---
 
-## 7. Technology Stack
-
-- **Runtime & Platform:** Google Chrome Extension Manifest V3
-- **Language:** TypeScript 5.9 (Strict mode enabled, `noExplicitAny: error`, `noUncheckedIndexedAccess: true`)
-- **UI Framework:** React 19, React DOM 19
-- **Build System:** Vite 8 (`@vitejs/plugin-react`, `@tailwindcss/vite`)
-- **Styling:** Tailwind CSS v4, CSS Variables, Royal Crystal design tokens
-- **UI Primitives:** Radix UI (`@radix-ui/react-dialog`, `@radix-ui/react-dropdown-menu`, `@radix-ui/react-slider`, `@radix-ui/react-switch`, `@radix-ui/react-tabs`, `@radix-ui/react-tooltip`)
-- **Iconography:** Google Material Symbols Rounded (`@fontsource-variable/material-symbols-rounded`) exclusively
-- **Typography:** Inter Variable (`@fontsource-variable/inter`), Manrope Variable (`@fontsource-variable/manrope`)
-- **State Management:** Zustand 5, Immer 10
-- **Validation & Schemas:** Zod 4
-- **Client Storage:** IndexedDB (`idb` v8) and Chrome Storage API (`@types/chrome`)
-- **Code Quality:** ESLint 9, `typescript-eslint`, Prettier 3
-- **Test Framework:** Vitest 4, `@testing-library/react`, `@testing-library/jest-dom`, JSDOM, `fake-indexeddb`
-
----
-
-## 8. Repository Structure
+## 10. Project Structure
 
 ```
 DECKORA/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md
-│   │   └── feature_request.md
-│   ├── workflows/
-│   │   └── ci.yml
-│   └── PULL_REQUEST_TEMPLATE.md
-├── docs/                               # Phase specifications, PRDs, ADRs & reports
-│   └── reports/
-│       ├── REPOSITORY_AUDIT_REPORT.md
-│       ├── SECURITY_AUDIT_REPORT.md
-│       └── RELEASE_VERIFICATION_REPORT.md
+├── .github/                            # CI workflows and community templates
+│   ├── ISSUE_TEMPLATE/                 # Structured bug and feature templates
+│   ├── workflows/ci.yml                # GitHub Actions test and verification pipeline
+│   └── PULL_REQUEST_TEMPLATE.md        # Pull request guidelines
+├── docs/                               # Architecture decision records and phase reports
+│   ├── reports/                        # Milestone implementation reports
+│   └── screenshots/                    # High-resolution product screenshots
 ├── public/                             # Extension runtime static assets
-│   ├── brand/                          # DECKORA vector logos and promotional artwork
+│   ├── brand/                          # Brand logos, symbols, and promotional banners
 │   ├── fonts/                          # SIL Open Font & Apache 2.0 license documents
 │   ├── icons/                          # 16, 32, 48, 128px PNG extension icons
 │   └── manifest.json                   # Chrome Extension Manifest V3 configuration
@@ -149,8 +197,8 @@ DECKORA/
 │   │   ├── shared/                     # Canvas background, MaterialSymbol, error boundary
 │   │   └── ui/                         # Buttons, Dialogs, Dropdowns, Inputs, Sliders, Tabs
 │   ├── design-system/                  # Royal Crystal color tokens & theme engine
-│   ├── features/                       # Modular product feature domains
-│   │   ├── bookmarks/                  # Sidebar drawer, dynamic folders, Chrome bookmarks sync
+│   ├── features/                       # Modular feature domains
+│   │   ├── bookmarks/                  # Recursive drawer, cascading flyouts, Chrome sync
 │   │   ├── clock/                      # Live digital clock, formatting, and time hooks
 │   │   ├── editor/                     # Canvas stage, toolbar, layers, inspector, snapping
 │   │   ├── elements/                   # Image, GIF, text rendering and creation dialogs
@@ -172,241 +220,140 @@ DECKORA/
 │   ├── test/                           # Vitest setup & testing mocks
 │   ├── types/                          # TypeScript workspace data contracts
 │   └── utils/                          # DOM utilities, Classnames (cn), URL protocol sanitizer
-├── .gitattributes                      # Git line ending normalization rules
-├── .gitignore                          # Git file exclusion rules
-├── .npmrc                              # Engine and dependency installation rules
-├── .prettierignore                     # Prettier file exclusion rules
-├── .prettierrc                         # Prettier formatting configuration
+├── CHANGELOG.md                        # Keep a Changelog documentation
 ├── CONTRIBUTING.md                     # Contribution guidelines and workflow rules
-├── eslint.config.js                    # ESLint 9 configuration with restricted import bans
 ├── LICENSE                             # MIT Open Source License
-├── newtab.html                         # Extension New Tab entrypoint HTML document
 ├── package.json                        # Node dependencies and project scripts
 ├── pnpm-lock.yaml                      # Deterministic pnpm dependency lockfile
 ├── README.md                           # Comprehensive product and technical documentation
-├── SECURITY.md                         # Responsible disclosure and security policy
-├── tsconfig.json                       # Strict TypeScript compiler options
-├── vite.config.ts                      # Multi-entry Vite bundler configuration
-└── vitest.config.ts                    # Vitest test suite configuration
+└── SECURITY.md                         # Responsible disclosure and security policy
 ```
 
 ---
 
-## 9. Installation Requirements
+## 11. Installation
 
-To build and run DECKORA locally, ensure you have:
+Ensure your development environment meets the following requirements:
 
-- **Operating System:** Windows, macOS, or Linux
 - **Node.js:** `v20.18.0` or `v22.x+` (verified on Node `v24.12.0`)
 - **Package Manager:** `pnpm` `v9.x` or `v10.x` (verified on `v10.29.3`)
-- **Browser:** Google Chrome or Chromium derivative supporting Manifest V3
+- **Browser:** Google Chrome or any Chromium-based browser supporting Manifest V3
 
 ---
 
-## 10. Local Development Setup
-
-Clone the repository and install the project dependencies using pnpm:
+## 12. Development Setup
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/Sanjaycs096/DECKORA.git
 cd DECKORA
 
-# Install dependencies deterministically
+# 2. Install dependencies with strict frozen lockfile
 pnpm install --frozen-lockfile
+
+# 3. Start local development server
+pnpm dev
 ```
 
----
-
-## 11. Development Commands
-
-The project includes standard scripts for development, quality verification, and testing:
-
-| Command              | Description                                                                                            |
-| :------------------- | :----------------------------------------------------------------------------------------------------- |
-| `pnpm dev`           | Starts Vite local development server (`http://localhost:5173/newtab.html`) for rapid component styling |
-| `pnpm build`         | Executes TypeScript typecheck (`tsc --noEmit`) followed by production Vite build to `dist/`            |
-| `pnpm build:watch`   | Continuously watches source files and rebuilds `dist/` on changes                                      |
-| `pnpm typecheck`     | Runs strict TypeScript compiler verification without emitting JavaScript                               |
-| `pnpm lint`          | Runs ESLint 9 across all source and test files                                                         |
-| `pnpm lint:fix`      | Automatically corrects fixable lint and formatting discrepancies                                       |
-| `pnpm format:check`  | Validates code formatting against Prettier rules                                                       |
-| `pnpm format`        | Formats all source files with Prettier                                                                 |
-| `pnpm test`          | Executes the complete Vitest test suite in jsdom                                                       |
-| `pnpm test:watch`    | Runs Vitest in interactive watch mode for test-driven development                                      |
-| `pnpm test:coverage` | Generates a comprehensive code coverage report                                                         |
+Visit `http://localhost:5173/newtab.html` to preview and develop UI components directly in your browser.
 
 ---
 
-## 12. Production Build Instructions
+## 13. Chrome Extension Installation
 
-To generate a reproducible production release:
+To run DECKORA as an active Chrome Extension:
+
+1. Build the production bundle:
+   ```bash
+   pnpm build
+   ```
+2. Open Google Chrome and navigate to `chrome://extensions/`.
+3. Enable **Developer mode** toggle in the top-right corner.
+4. Click **Load unpacked** in the top-left toolbar.
+5. Select the **`dist`** directory inside the `DECKORA` repository.
+6. Open a new tab (`Ctrl+T` or `⌘T`) to experience DECKORA!
+
+---
+
+## 14. Permissions and Privacy
+
+DECKORA strictly observes least-privilege extension architecture:
+
+| Permission                       | Scope        | Justification                                                                                                         |
+| :------------------------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `storage`                        | Required     | Persisting workspace layouts, widget positions, and profile settings locally in `chrome.storage.local`.               |
+| `favicon`                        | Required     | Resolving high-resolution shortcut icons via Chrome's internal `chrome://favicon2/` cache with zero external queries. |
+| `alarms`                         | Required     | Scheduling periodic background speed checks when enabled by the user.                                                 |
+| `bookmarks`                      | **Optional** | Reading Chrome bookmarks tree for the Bookmarks flyout. If denied, local curated links are used.                      |
+| `https://speed.cloudflare.com/*` | **Optional** | Bounded endpoints queried exclusively during user-authorized speed tests.                                             |
+
+- **Zero Tracking:** No analytics libraries, remote telemetry, or user tracking.
+- **Zero Cloud Storage:** Your bookmarks, shortcuts, and personal notes never leave your computer.
+
+---
+
+## 15. Workspace Backup / Import / Export
+
+Protect your personalized workspace with portable `.deckora-bundle.zip` archives:
+
+- **Export:** Packages active layouts, profile definitions, and local media into a compressed archive.
+- **Import Verification:** Inspects magic bytes (PNG, JPEG, WebP, AVIF, GIF), validates uncompressed size caps (< 50 MB), and protects against path traversal (Zip Slip) attacks before extraction.
+- **Backward Compatibility:** Seamlessly restores older `.aurora-bundle.zip` archives.
+
+---
+
+## 16. Testing and CI
+
+The repository is protected by comprehensive automated test suites:
 
 ```bash
-pnpm build
-```
-
-The build output is emitted to the `dist/` directory in the project root:
-
-- `dist/newtab.html`: Compiled New Tab HTML document.
-- `dist/background.js`: Compiled Chrome MV3 background service worker.
-- `dist/assets/`: Code-split JavaScript chunks, scoped CSS, and locally bundled font files.
-- `dist/manifest.json`: Copied Manifest V3 configuration.
-- `dist/icons/`: Bundled PNG extension icons.
-- `dist/brand/`: Bundled SVG branding marks.
-
----
-
-## 13. Chrome Extension Installation Instructions
-
-To install the built extension in Google Chrome:
-
-1. Ensure you have run `pnpm build` and verified that the `dist/` folder exists.
-2. Launch Google Chrome.
-3. Open a new tab and navigate to `chrome://extensions/`.
-4. Locate the **Developer mode** toggle switch in the top-right corner of the Extensions page and turn it **ON**.
-5. In the top-left toolbar, click the **Load unpacked** button.
-6. In the system folder picker, browse to your `DECKORA` directory and select the **`dist`** folder.
-7. Click **Select Folder** (or **Open**).
-8. The extension card **"DECKORA — Your Personal Browser Workspace"** will now appear in your list of installed extensions.
-
----
-
-## 14. Enabling & Testing the Extension
-
-Once loaded unpacked:
-
-1. Open a new tab by clicking the **+** button in Chrome's tab bar or pressing `Ctrl+T` (Windows/Linux) or `⌘T` (macOS).
-2. Chrome will display the DECKORA New Tab workspace.
-3. _(First Run Notice)_: If Chrome displays a prompt asking _"Is this the new tab page you were expecting?"_, select **Keep changes** to keep DECKORA as your active New Tab page.
-4. Click the **Edit Workspace** button (pencil icon) in the top-right navigation bar to enter Master Edit Mode, customize widgets, and configure your appearance.
-
----
-
-## 15. Permission Explanations
-
-DECKORA adheres strictly to the principle of least privilege:
-
-### Required Core Permissions
-
-- `storage`: Enables saving workspace widget layouts, profile metadata, search settings, and appearance choices in `chrome.storage.local`.
-- `favicon`: Grants access to Chrome's native internal favicon service (`chrome://favicon2/`) to resolve high-resolution favicons for custom shortcut tiles without querying external third-party favicon aggregators.
-- `alarms`: Schedules optional, user-configured background speed checks via `chrome.alarms` strictly while Chrome is active.
-
-### Optional Permissions (Strictly Opt-In)
-
-- `bookmarks`: Optional permission requested only when the user toggles on native Chrome bookmark synchronization in the Bookmarks Drawer. If denied, DECKORA uses an isolated curated local bookmark store.
-- `search`: Optional permission enabling native omnibox search query execution when configured by the user.
-
-### Optional Host Permissions (Strictly Opt-In)
-
-- `https://speed.cloudflare.com/*`: Required exclusively if the user activates the Internet Speed Monitor. DECKORA queries Cloudflare CDN endpoints solely to measure ping, jitter, and bandwidth.
-- `https://suggestqueries.google.com/*`, `https://duckduckgo.com/*`, `https://api.bing.com/*`: Optional suggestion query endpoints queried only if the user explicitly turns on live search query suggestions.
-
----
-
-## 16. Local Data Storage & Privacy Guarantees
-
-DECKORA is built from the ground up as a **local-first, privacy-respecting product**:
-
-- **Zero Accounts:** No signup, authentication, or cloud account is required.
-- **Zero Analytics:** DECKORA contains no Google Analytics, PostHog, Mixpanel, or third-party telemetry scripts.
-- **Zero Tracking:** Your bookmarks, browsing history, shortcut URLs, search queries, notes, and wallpapers are never sent to any remote server or maintainer database.
-- **Local Storage Architecture:**
-  - Layout definitions, widget positions, and profile settings are stored exclusively in Chrome's sandboxed `chrome.storage.local`.
-  - Wallpapers, custom uploaded images, animated GIFs, and custom fonts are stored as binary records inside an isolated, client-side IndexedDB database (`aurora-assets-db`).
-
----
-
-## 17. Workspace Import & Export (.zip)
-
-DECKORA provides a complete backup and restore mechanism:
-
-### Exporting Your Workspace
-
-1. Enter **Master Edit Mode** by clicking the Edit button in the header.
-2. In the toolbar, click **Backup / Restore**.
-3. Click **Export Workspace**.
-4. DECKORA bundles your current workspace metadata, widget layout, profiles, and binary assets (wallpapers, images, fonts) into a single portable `.deckora-bundle.zip` file and triggers a browser download.
-
-### Importing a Workspace
-
-1. In the **Backup / Restore** dialog, select or drag-and-drop a `.deckora-bundle.zip` archive (or legacy `.aurora-bundle.zip`).
-2. DECKORA automatically validates the archive:
-   - Verifies maximum archive uncompressed size limit (50 MB cap).
-   - Validates file paths to prevent directory traversal attacks (Zip Slip).
-   - Checks file magic bytes to verify genuine PNG, JPEG, WebP, AVIF, and GIF headers.
-   - Validates `manifest.json` structure against the strict Zod workspace schema.
-3. Upon successful validation, the workspace and all binary media are restored atomically.
-
----
-
-## 18. Security Information
-
-DECKORA implements defense-in-depth protections across all layers:
-
-1. **Strict Content Security Policy (CSP):** The extension enforces `script-src 'self'; object-src 'self';`. Inline scripts, `eval()`, `new Function()`, and remote scripts are strictly prohibited.
-2. **URL Protocol Sanitization:** All shortcut links and search redirection targets are sanitized using strict protocol validation (`http:`, `https:`). Dangerous schemes such as `javascript:`, `vbscript:`, and arbitrary `data:` URIs are neutralized.
-3. **Magic-Byte Sniffing:** Uploaded wallpapers, images, and GIFs are inspected at the binary level using their magic header bytes, preventing MIME-type spoofing or polyglot payload execution.
-4. **Local Fonts & Icons:** All fonts (`Inter Variable`, `Manrope Variable`, `Material Symbols Rounded`) are self-hosted and bundled into the extension bundle. No assets are loaded from external CDNs or Google Fonts servers.
-5. **Security Reporting:** Refer to [SECURITY.md](SECURITY.md) for vulnerability disclosure procedures.
-
----
-
-## 19. Testing & Quality Verification
-
-DECKORA includes an automated test suite with 100% pass rates across unit, component, and security integration suites:
-
-```bash
-# Run all unit and integration tests
+# Run unit, integration, and security tests
 pnpm test
+
+# Run code style check
+pnpm format:check
+
+# Run TypeScript compiler typecheck
+pnpm typecheck
+
+# Run ESLint analysis
+pnpm lint
+
+# Production vulnerability audit
+pnpm audit --prod
 ```
 
-### Test Suite Highlights
-
-- **Integration Tests:** `src/app/App.test.tsx` verifies the full New Tab experience, 5-control header, full-viewport layout, and absence of legacy footers.
-- **Canvas & History:** `src/features/editor/MasterEditorShell.test.tsx` tests drag-and-drop, snapping, multi-selection marquee, and transaction commits.
-- **Security Tests:** `src/security/securityAudit.test.tsx` validates ZIP slip resistance, MIME-spoofing rejection, URL protocol sanitization, least-privilege manifest declaration, and bounded speed test limits.
-- **Data & Storage:** `src/services/storage/chromeStorageService.test.ts` and `src/services/assets/assetDb.test.ts` test schema migrations and transactional IndexedDB operations.
+GitHub Actions executes the complete quality pipeline on every push and pull request to `main`.
 
 ---
 
-## 20. Known Limitations
+## 17. Roadmap
 
-- **Chrome Omnibox & Native Toolbar:** Chrome's MV3 API prevents extensions from modifying or styling Chrome's native browser frame, tab strip, or URL omnibox. DECKORA's visual control begins at the New Tab page viewport.
-- **Background Speed Testing Lifecycles:** Chrome terminates background service workers after approximately 30 seconds of inactivity. Periodic background speed tests rely on `chrome.alarms` and only run while Google Chrome is active and connected to the internet. Speed checks do not run when the computer or browser is closed.
-- **Single-Origin IndexedDB Quota:** Custom media storage is limited by the browser's origin quota (typically hundreds of megabytes to gigabytes depending on available disk space).
-
----
-
-## 21. Roadmap
-
-- [ ] **Widget Ecosystem:** Optional weather forecast widget and sticky scratchpad note widget with local Markdown support.
-- [ ] **Shortcut Categories:** Ability to organize shortcuts into named tabbed folders or groups on the canvas.
-- [ ] **Canvas Layout Snapshots:** Quick layout switcher to flip between multiple canvas arrangements within the same profile.
-- [ ] **Live Wallpaper Engine:** Optional CSS shader or subtle canvas particle animation for dynamic background visuals.
-- [ ] **Keyboard Navigability:** Full keyboard arrow-key navigation across canvas elements in View Mode.
+- [ ] **Interactive Widget Expansions:** Embedded to-do lists, scratchpad sticky notes, and weather reports.
+- [ ] **Canvas Presets Library:** One-click pre-arranged dashboard templates.
+- [ ] **Custom Shader Backdrops:** Optional subtle ambient canvas animations.
+- [ ] **Keyboard Canvas Navigation:** Comprehensive arrow-key navigation across canvas objects in View Mode.
 
 ---
 
-## 22. Contribution Guidelines
+## 18. Contribution Guide
 
-Contributions from the community are warmly welcomed! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on code style, branch naming conventions, TypeScript requirements, and PR submission processes.
+Contributions from the open-source community are warmly welcomed! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on code style, branch naming conventions, TypeScript standards, and pull request verification.
 
 ---
 
-## 23. License
+## 19. Security Policy
+
+Security is paramount in DECKORA. Please consult [SECURITY.md](SECURITY.md) for information on our responsible disclosure policy, supported versions, and how to report vulnerabilities.
+
+---
+
+## 20. License and Maintainer
 
 DECKORA is open-source software licensed under the **[MIT License](LICENSE)**.
 
-```
-Copyright (c) 2026 SANJAYKUMAR M
-```
+- **Author & Maintainer:** [SANJAYKUMAR M](https://github.com/Sanjaycs096)
+- **Repository:** [https://github.com/Sanjaycs096/DECKORA](https://github.com/Sanjaycs096/DECKORA)
+- **Issues & Support:** [https://github.com/Sanjaycs096/DECKORA/issues](https://github.com/Sanjaycs096/DECKORA/issues)
 
----
-
-## 24. Author & Maintainer
-
-- **Maintainer:** [SANJAYKUMAR M](https://github.com/Sanjaycs096)
-- **GitHub Repository:** [https://github.com/Sanjaycs096/DECKORA](https://github.com/Sanjaycs096/DECKORA)
-- **Issue Tracker:** [https://github.com/Sanjaycs096/DECKORA/issues](https://github.com/Sanjaycs096/DECKORA/issues)
+Copyright © 2026 SANJAYKUMAR M. All rights reserved.

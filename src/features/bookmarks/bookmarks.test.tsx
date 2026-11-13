@@ -427,4 +427,211 @@ describe('Phase 6.2 — Left Bookmark Sidebar, Hover Flyout & Opt-In Chrome Book
     expect(onOpenChange).toHaveBeenCalledWith(false);
     expect(triggerRef.current).toHaveFocus();
   });
+
+  it('supports recursive multi-level nested folder hover, sibling switching, breadcrumb jumps, and keyboard navigation', async () => {
+    const user = userEvent.setup();
+    const events = createMockBookmarkEvents();
+
+    // Deeply nested tree matching Phase 7.2 PRD specification:
+    // Development
+    // ├── GitHub
+    // ├── Frontend
+    // │   ├── React
+    // │   ├── Tailwind CSS
+    // │   └── Learning
+    // │       ├── Documentation
+    // │       └── Tutorials
+    // │           └── Deep Video Link
+    // └── Backend
+    //     ├── Node.js
+    //     └── PostgreSQL
+    const treeData: chrome.bookmarks.BookmarkTreeNode[] = [
+      {
+        id: '0',
+        title: '',
+        syncing: false,
+        children: [
+          {
+            id: '1',
+            parentId: '0',
+            title: 'Bookmarks bar',
+            syncing: false,
+            children: [
+              {
+                id: 'f-dev',
+                parentId: '1',
+                title: 'Development',
+                syncing: false,
+                children: [
+                  {
+                    id: 'b-gh',
+                    parentId: 'f-dev',
+                    title: 'GitHub',
+                    url: 'https://github.com/',
+                    syncing: false,
+                  },
+                  {
+                    id: 'f-frontend',
+                    parentId: 'f-dev',
+                    title: 'Frontend',
+                    syncing: false,
+                    children: [
+                      {
+                        id: 'b-react',
+                        parentId: 'f-frontend',
+                        title: 'React',
+                        url: 'https://react.dev/',
+                        syncing: false,
+                      },
+                      {
+                        id: 'b-tailwind',
+                        parentId: 'f-frontend',
+                        title: 'Tailwind CSS',
+                        url: 'https://tailwindcss.com/',
+                        syncing: false,
+                      },
+                      {
+                        id: 'f-learning',
+                        parentId: 'f-frontend',
+                        title: 'Learning',
+                        syncing: false,
+                        children: [
+                          {
+                            id: 'b-docs',
+                            parentId: 'f-learning',
+                            title: 'Documentation',
+                            url: 'https://developer.mozilla.org/',
+                            syncing: false,
+                          },
+                          {
+                            id: 'f-tutorials',
+                            parentId: 'f-learning',
+                            title: 'Tutorials',
+                            syncing: false,
+                            children: [
+                              {
+                                id: 'b-deep',
+                                parentId: 'f-tutorials',
+                                title: 'Deep Video Link',
+                                url: 'https://youtube.com/',
+                                syncing: false,
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    id: 'f-backend',
+                    parentId: 'f-dev',
+                    title: 'Backend',
+                    syncing: false,
+                    children: [
+                      {
+                        id: 'b-node',
+                        parentId: 'f-backend',
+                        title: 'Node.js',
+                        url: 'https://nodejs.org/',
+                        syncing: false,
+                      },
+                      {
+                        id: 'b-postgres',
+                        parentId: 'f-backend',
+                        title: 'PostgreSQL',
+                        url: 'https://www.postgresql.org/',
+                        syncing: false,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    (globalThis as unknown as { chrome: unknown }).chrome = {
+      permissions: {
+        contains: vi.fn(() => Promise.resolve(true)),
+        request: vi.fn(() => Promise.resolve(true)),
+      },
+      bookmarks: {
+        getTree: vi.fn(() => Promise.resolve(treeData)),
+        onCreated: events.onCreated,
+        onRemoved: events.onRemoved,
+        onChanged: events.onChanged,
+        onMoved: events.onMoved,
+        onChildrenReordered: events.onChildrenReordered,
+        onImportEnded: events.onImportEnded,
+      },
+    };
+
+    const triggerRef = createRef<HTMLButtonElement>();
+    const onOpenChange = vi.fn();
+
+    render(
+      <TooltipProvider>
+        <div>
+          <button ref={triggerRef} type="button">
+            Bookmarks Trigger
+          </button>
+          <BookmarksDrawer open onOpenChange={onOpenChange} triggerRef={triggerRef} />
+        </div>
+      </TooltipProvider>,
+    );
+
+    // 1. Hover Development (Root level) -> Opens Development flyout showing GitHub, Frontend, Backend
+    const devBtn = await screen.findByRole('button', { name: /Development/i });
+    await user.hover(devBtn);
+
+    const devFlyout = screen.getByRole('region', { name: 'Development bookmarks' });
+    expect(within(devFlyout).getByText('GitHub')).toBeInTheDocument();
+    expect(within(devFlyout).getByRole('button', { name: /Frontend/i })).toBeInTheDocument();
+    expect(within(devFlyout).getByRole('button', { name: /Backend/i })).toBeInTheDocument();
+
+    // 2. Hover Frontend (Level 1 nested) -> Cascades next flyout showing React, Tailwind, Learning
+    const frontendBtn = within(devFlyout).getByRole('button', { name: /Frontend/i });
+    await user.hover(frontendBtn);
+
+    const frontendFlyout = screen.getByRole('region', { name: 'Frontend bookmarks' });
+    expect(within(frontendFlyout).getByText('React')).toBeInTheDocument();
+    expect(within(frontendFlyout).getByText('Tailwind CSS')).toBeInTheDocument();
+    expect(within(frontendFlyout).getByRole('button', { name: /Learning/i })).toBeInTheDocument();
+
+    // 3. Hover Learning (Level 2 nested) -> Cascades third flyout showing Documentation, Tutorials
+    const learningBtn = within(frontendFlyout).getByRole('button', { name: /Learning/i });
+    await user.hover(learningBtn);
+
+    const learningFlyout = screen.getByRole('region', { name: 'Learning bookmarks' });
+    expect(within(learningFlyout).getByText('Documentation')).toBeInTheDocument();
+    expect(within(learningFlyout).getByRole('button', { name: /Tutorials/i })).toBeInTheDocument();
+
+    // 4. Hover Tutorials (Level 3 nested) -> Cascades fourth flyout showing Deep Video Link
+    const tutorialsBtn = within(learningFlyout).getByRole('button', { name: /Tutorials/i });
+    await user.hover(tutorialsBtn);
+
+    const tutorialsFlyout = screen.getByRole('region', { name: 'Tutorials bookmarks' });
+    expect(within(tutorialsFlyout).getByText('Deep Video Link')).toBeInTheDocument();
+
+    // 5. Switching hover to Backend (sibling of Frontend inside Development)
+    // Instantly closes Frontend, Learning, and Tutorials flyouts, and displays Backend
+    const backendBtn = within(devFlyout).getByRole('button', { name: /Backend/i });
+    await user.hover(backendBtn);
+
+    const backendFlyout = screen.getByRole('region', { name: 'Backend bookmarks' });
+    expect(within(backendFlyout).getByText('Node.js')).toBeInTheDocument();
+    expect(within(backendFlyout).getByText('PostgreSQL')).toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Frontend bookmarks' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Learning bookmarks' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Tutorials bookmarks' })).not.toBeInTheDocument();
+
+    // 6. Keyboard navigation: ArrowLeft steps back from Backend flyout to Development
+    const nodeItem = within(backendFlyout).getByText('Node.js').closest('a')!;
+    nodeItem.focus();
+    await user.keyboard('{ArrowLeft}');
+    expect(screen.queryByRole('region', { name: 'Backend bookmarks' })).not.toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Development bookmarks' })).toBeInTheDocument();
+  });
 });

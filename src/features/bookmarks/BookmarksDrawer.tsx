@@ -13,6 +13,7 @@ import { openBookmarksManager } from '@/features/navigation/navDestinations';
 import { getExtensionFaviconUrl, getShortcutMonogram } from '@/features/shortcuts/shortcutUtils';
 import { useWorkspaceStore } from '@/state/workspaceStore';
 import { sanitizeHttpUrl } from '@/utils/url';
+import { BookmarkFlyoutPanel } from './BookmarkFlyoutPanel';
 import {
   checkBookmarksPermission,
   requestBookmarksPermission,
@@ -35,7 +36,7 @@ export interface BookmarksDrawerProps {
   triggerRef?: RefObject<HTMLButtonElement | null>;
 }
 
-function BookmarkFavicon({ title, url }: { title: string; url: string }) {
+export function BookmarkFavicon({ title, url }: { title: string; url: string }) {
   const [failedUrl, setFailedUrl] = useState<string | null>(null);
   const faviconUrl = getExtensionFaviconUrl(url);
 
@@ -88,10 +89,9 @@ function BookmarksDrawerPanel({
   const [loadError, setLoadError] = useState<string | null>(null);
   const [snapshot, setSnapshot] = useState<BookmarksTreeSnapshot | null>(null);
 
-  // Hover & click/pin state for the Left Folder Sidebar -> Right Flyout interaction
-  const [hoveredFolderId, setHoveredFolderId] = useState<string | null>(null);
-  const [pinnedFolderId, setPinnedFolderId] = useState<string | null>(null);
-  const [flyoutSubpathIds, setFlyoutSubpathIds] = useState<string[]>([]);
+  // Active path of folder IDs: [mainFolderId, subFolderId, subSubFolderId, ...]
+  const [activePath, setActivePath] = useState<string[]>([]);
+  const [pinnedPath, setPinnedPath] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCuratedInGranted, setShowCuratedInGranted] = useState(false);
 
@@ -99,6 +99,7 @@ function BookmarksDrawerPanel({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const folderButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const hoverClearTimerRef = useRef<number | null>(null);
+  const hoverOpenTimerRef = useRef<number | null>(null);
 
   const cancelHoverClear = useCallback(() => {
     if (hoverClearTimerRef.current !== null) {
@@ -107,18 +108,31 @@ function BookmarksDrawerPanel({
     }
   }, []);
 
+  const cancelHoverOpen = useCallback(() => {
+    if (hoverOpenTimerRef.current !== null) {
+      window.clearTimeout(hoverOpenTimerRef.current);
+      hoverOpenTimerRef.current = null;
+    }
+  }, []);
+
   const scheduleHoverClear = useCallback(() => {
     cancelHoverClear();
     hoverClearTimerRef.current = window.setTimeout(() => {
-      setHoveredFolderId(null);
-    }, 120);
-  }, [cancelHoverClear]);
+      // If user pinned a path, preserve it; otherwise clear hover path
+      if (pinnedPath.length > 0) {
+        setActivePath(pinnedPath);
+      } else {
+        setActivePath([]);
+      }
+    }, 160);
+  }, [cancelHoverClear, pinnedPath]);
 
   useEffect(() => {
     return () => {
       cancelHoverClear();
+      cancelHoverOpen();
     };
-  }, [cancelHoverClear]);
+  }, [cancelHoverClear, cancelHoverOpen]);
 
   const loadTree = useCallback(async () => {
     setIsLoading(true);
@@ -160,9 +174,8 @@ function BookmarksDrawerPanel({
       if (cancelled) return;
       setPermissionState('denied');
       setSnapshot(null);
-      setHoveredFolderId(null);
-      setPinnedFolderId(null);
-      setFlyoutSubpathIds([]);
+      setActivePath([]);
+      setPinnedPath([]);
       setPermissionNote('Chrome Bookmarks permission was revoked.');
     });
 
@@ -238,25 +251,12 @@ function BookmarksDrawerPanel({
     return getInitialMainFolders(snapshot);
   }, [snapshot]);
 
-  const activeMainFolderId = hoveredFolderId ?? pinnedFolderId;
+  const activeMainFolderId = activePath[0] ?? null;
 
   const activeMainFolder: NormalizedBookmarkFolder | null = useMemo(() => {
     if (!snapshot || !activeMainFolderId) return null;
-    return mainFolders.find((f) => f.id === activeMainFolderId) ?? null;
-  }, [snapshot, mainFolders, activeMainFolderId]);
-
-  const flyoutBreadcrumbTrail = useMemo(() => {
-    if (!snapshot || !activeMainFolder) return [];
-    return flyoutSubpathIds
-      .map((id) => snapshot.foldersById[id])
-      .filter((folder): folder is NormalizedBookmarkFolder => Boolean(folder));
-  }, [snapshot, activeMainFolder, flyoutSubpathIds]);
-
-  const activeFlyoutFolder: NormalizedBookmarkFolder | null = useMemo(() => {
-    if (!activeMainFolder) return null;
-    if (flyoutBreadcrumbTrail.length === 0) return activeMainFolder;
-    return flyoutBreadcrumbTrail[flyoutBreadcrumbTrail.length - 1] ?? activeMainFolder;
-  }, [activeMainFolder, flyoutBreadcrumbTrail]);
+    return snapshot.foldersById[activeMainFolderId] ?? null;
+  }, [snapshot, activeMainFolderId]);
 
   const searchResults = useMemo(() => {
     if (!snapshot || !searchQuery.trim()) return null;
@@ -265,35 +265,68 @@ function BookmarksDrawerPanel({
 
   const handleSelectMainFolderHover = (folderId: string) => {
     cancelHoverClear();
-    if (hoveredFolderId !== folderId) {
-      setFlyoutSubpathIds([]);
-    }
-    setHoveredFolderId(folderId);
+    if (activePath[0] === folderId && activePath.length === 1) return;
+    setActivePath([folderId]);
   };
 
   const handleClickMainFolder = (folderId: string) => {
     cancelHoverClear();
-    if (pinnedFolderId === folderId && !hoveredFolderId) {
-      setPinnedFolderId(null);
-      setFlyoutSubpathIds([]);
+    if (pinnedPath[0] === folderId && activePath[0] === folderId && activePath.length === 1) {
+      setPinnedPath([]);
+      setActivePath([]);
       return;
     }
-    if (pinnedFolderId !== folderId) {
-      setFlyoutSubpathIds([]);
-    }
-    setPinnedFolderId(folderId);
-    setHoveredFolderId(folderId);
+    setPinnedPath([folderId]);
+    setActivePath([folderId]);
   };
 
-  const handleReturnToFolders = () => {
+  const handleSelectFolderHover = (folderId: string, depth: number) => {
     cancelHoverClear();
+    setActivePath((prev) => [...prev.slice(0, depth), folderId]);
+  };
+
+  const handleSelectFolderClick = (folderId: string, depth: number) => {
+    cancelHoverClear();
+    const next = [...activePath.slice(0, depth), folderId];
+    setActivePath(next);
+    setPinnedPath(next);
+  };
+
+  const handleBookmarkHover = (depth: number) => {
+    cancelHoverClear();
+    cancelHoverOpen();
+    setActivePath((prev) => (prev.length > depth ? prev.slice(0, depth) : prev));
+  };
+
+  const handleNavigateParent = () => {
+    cancelHoverClear();
+    cancelHoverOpen();
+    setActivePath((prev) => {
+      const next = prev.slice(0, -1);
+      setPinnedPath(next);
+      return next;
+    });
+  };
+
+  const handleNavigateRoot = () => {
+    cancelHoverClear();
+    cancelHoverOpen();
     const restoreFocusId = activeMainFolderId;
-    setPinnedFolderId(null);
-    setHoveredFolderId(null);
-    setFlyoutSubpathIds([]);
+    setActivePath([]);
+    setPinnedPath([]);
     if (restoreFocusId) {
       folderButtonRefs.current[restoreFocusId]?.focus();
     }
+  };
+
+  const handleNavigatePathIndex = (depthIndex: number) => {
+    cancelHoverClear();
+    cancelHoverOpen();
+    setActivePath((prev) => {
+      const next = prev.slice(0, depthIndex + 1);
+      setPinnedPath(next);
+      return next;
+    });
   };
 
   const handleFolderKeyDown = (
@@ -315,13 +348,11 @@ function BookmarksDrawerPanel({
       }
     } else if (event.key === 'ArrowRight') {
       event.preventDefault();
-      setPinnedFolderId(folderId);
-      setHoveredFolderId(folderId);
-      setFlyoutSubpathIds([]);
+      handleClickMainFolder(folderId);
     } else if (event.key === 'ArrowLeft') {
       if (activeMainFolderId) {
         event.preventDefault();
-        handleReturnToFolders();
+        handleNavigateRoot();
       }
     }
   };
@@ -379,7 +410,7 @@ function BookmarksDrawerPanel({
     </section>
   );
 
-  const showFlyout = permissionState === 'granted' && !searchResults && Boolean(activeFlyoutFolder);
+  const showFlyout = permissionState === 'granted' && !searchResults && Boolean(activeMainFolder);
 
   return (
     <div
@@ -388,12 +419,12 @@ function BookmarksDrawerPanel({
       aria-label="Bookmarks Library"
       onMouseLeave={scheduleHoverClear}
       onMouseEnter={cancelHoverClear}
-      className="fixed top-16 right-4 left-4 z-[70] flex flex-col items-start gap-2.5 sm:right-auto sm:left-6 md:flex-row"
+      className="fixed top-16 right-4 left-4 z-[70] flex flex-col items-start gap-2.5 overflow-x-auto pb-4 sm:right-auto sm:left-6 md:flex-row max-w-[calc(100vw-2rem)]"
     >
       {/* Left Floating Folder Sidebar */}
       <aside
         aria-label="Bookmarks sidebar"
-        className="aurora-glass-elevated flex max-h-[calc(100dvh-5.25rem)] w-full flex-col overflow-hidden border border-[var(--aurora-border)] shadow-2xl sm:w-80"
+        className="aurora-glass-elevated flex max-h-[calc(100dvh-5.25rem)] w-full shrink-0 flex-col overflow-hidden border border-[var(--aurora-border)] shadow-2xl sm:w-80"
       >
         <div className="flex items-center justify-between gap-2 border-b border-[var(--aurora-border)] px-4 py-3">
           <div className="flex min-w-0 items-center gap-2.5">
@@ -600,7 +631,7 @@ function BookmarksDrawerPanel({
                       <ul role="list" aria-label="Chrome bookmark folders" className="space-y-1">
                         {mainFolders.map((folder, idx) => {
                           const isActive = activeMainFolderId === folder.id;
-                          const isPinned = pinnedFolderId === folder.id;
+                          const isPinned = pinnedPath[0] === folder.id;
                           return (
                             <li key={folder.id}>
                               <button
@@ -673,159 +704,26 @@ function BookmarksDrawerPanel({
         </div>
       </aside>
 
-      {/* Adjacent Floating Bookmark Contents Flyout */}
-      {showFlyout && activeFlyoutFolder && activeMainFolder && (
-        <section
-          aria-label={`${activeFlyoutFolder.title} bookmarks`}
-          onMouseEnter={cancelHoverClear}
-          className="aurora-glass-elevated flex max-h-[calc(100dvh-5.25rem)] w-full flex-col overflow-hidden border border-[var(--aurora-border)] shadow-2xl sm:w-88 md:w-96"
-        >
-          <div className="flex items-center justify-between gap-2 border-b border-[var(--aurora-border)] px-4 py-3">
-            <div className="flex min-w-0 items-center gap-2">
-              {flyoutBreadcrumbTrail.length > 0 && (
-                <IconButton
-                  icon="arrow_back"
-                  label="Back to parent folder"
-                  size="sm"
-                  onClick={() => setFlyoutSubpathIds((prev) => prev.slice(0, -1))}
-                />
-              )}
-              <div className="min-w-0">
-                <h3 className="truncate font-[var(--font-display)] text-sm font-semibold text-[var(--aurora-text)]">
-                  {activeFlyoutFolder.title}
-                </h3>
-                <p className="truncate text-[11px] text-[var(--aurora-text-muted)]">
-                  {activeFlyoutFolder.bookmarkCount}{' '}
-                  {activeFlyoutFolder.bookmarkCount === 1 ? 'bookmark' : 'bookmarks'}
-                  {flyoutBreadcrumbTrail.length > 0 ? ` • inside ${activeMainFolder.title}` : ''}
-                </p>
-              </div>
-            </div>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              aria-label="Back to folders"
-              onClick={handleReturnToFolders}
-              className="h-7 shrink-0 px-2 text-[11px]"
-            >
-              <MaterialSymbol name="close" size={14} />
-              <span className="hidden sm:inline">Folders</span>
-            </Button>
-          </div>
-
-          {flyoutBreadcrumbTrail.length > 0 && (
-            <nav
-              aria-label="Bookmark folder breadcrumbs"
-              className="flex flex-wrap items-center gap-1 border-b border-[var(--aurora-border)] bg-[var(--aurora-surface)]/30 px-4 py-2 text-[11px] text-[var(--aurora-text-secondary)]"
-            >
-              <button
-                type="button"
-                onClick={() => setFlyoutSubpathIds([])}
-                className="aurora-focus-ring cursor-pointer rounded px-1.5 py-0.5 hover:text-[var(--aurora-text)]"
-              >
-                {activeMainFolder.title}
-              </button>
-              {flyoutBreadcrumbTrail.map((sub, idx) => (
-                <span key={sub.id} className="inline-flex items-center gap-1">
-                  <MaterialSymbol name="chevron_right" size={13} />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFlyoutSubpathIds(
-                        flyoutBreadcrumbTrail.slice(0, idx + 1).map((item) => item.id),
-                      )
-                    }
-                    className={`aurora-focus-ring cursor-pointer rounded px-1.5 py-0.5 hover:text-[var(--aurora-text)] ${
-                      idx === flyoutBreadcrumbTrail.length - 1
-                        ? 'font-semibold text-[var(--aurora-primary)]'
-                        : ''
-                    }`}
-                  >
-                    {sub.title}
-                  </button>
-                </span>
-              ))}
-            </nav>
-          )}
-
-          <div className="flex-1 overflow-y-auto p-3">
-            {activeFlyoutFolder.children.length === 0 ? (
-              <div className="rounded-xl border border-[var(--aurora-border)] bg-[var(--aurora-surface)]/30 p-6 text-center text-xs text-[var(--aurora-text-secondary)]">
-                This folder has no bookmarks yet.
-              </div>
-            ) : (
-              <ul className="divide-y divide-[var(--aurora-border)] overflow-hidden rounded-2xl border border-[var(--aurora-border)] bg-[var(--aurora-surface)]/35">
-                {activeFlyoutFolder.children.map((node) =>
-                  node.kind === 'folder' ? (
-                    <li key={node.id}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPinnedFolderId(activeMainFolder.id);
-                          setFlyoutSubpathIds((prev) => [...prev, node.id]);
-                        }}
-                        className="aurora-focus-ring flex w-full cursor-pointer items-center justify-between gap-2 px-3 py-2.5 text-left transition-colors hover:bg-[var(--aurora-surface-elevated)]/60"
-                      >
-                        <div className="flex min-w-0 items-center gap-2.5">
-                          <MaterialSymbol
-                            name="folder"
-                            size={17}
-                            className="shrink-0 text-[var(--aurora-primary)]"
-                          />
-                          <span className="truncate text-xs font-medium text-[var(--aurora-text)]">
-                            {node.title}
-                          </span>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-1.5 text-[11px] text-[var(--aurora-text-muted)]">
-                          <span>{node.bookmarkCount}</span>
-                          <MaterialSymbol name="chevron_right" size={16} />
-                        </div>
-                      </button>
-                    </li>
-                  ) : (
-                    <li
-                      key={node.id}
-                      className="flex items-center justify-between gap-2 px-3 py-2 transition-colors hover:bg-[var(--aurora-surface-elevated)]/60"
-                    >
-                      <a
-                        href={node.url}
-                        onClick={(e) => {
-                          if (onNavigate) {
-                            e.preventDefault();
-                            onNavigate(node.url);
-                            onOpenChange(false);
-                          }
-                        }}
-                        className="aurora-focus-ring flex min-w-0 flex-1 items-center gap-2.5 rounded-lg py-0.5"
-                      >
-                        <BookmarkFavicon title={node.title} url={node.url} />
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-xs font-medium text-[var(--aurora-text)]">
-                            {node.title}
-                          </p>
-                          <p className="truncate text-[10px] text-[var(--aurora-text-muted)]">
-                            {node.hostname}
-                          </p>
-                        </div>
-                      </a>
-                      <a
-                        href={node.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Open ${node.title} in new tab`}
-                        className="aurora-focus-ring inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[var(--aurora-text-muted)] transition-colors hover:bg-[var(--aurora-surface)] hover:text-[var(--aurora-text)]"
-                      >
-                        <MaterialSymbol name="open_in_new" size={14} />
-                      </a>
-                    </li>
-                  ),
-                )}
-              </ul>
-            )}
-          </div>
-        </section>
+      {/* Recursive Adjacent Cascading Flyout Panels */}
+      {showFlyout && activeMainFolder && snapshot && (
+        <BookmarkFlyoutPanel
+          key={activeMainFolder.id}
+          folder={activeMainFolder}
+          depth={0}
+          activePath={activePath}
+          foldersById={snapshot.foldersById}
+          activeMainFolder={activeMainFolder}
+          onSelectFolderHover={handleSelectFolderHover}
+          onSelectFolderClick={handleSelectFolderClick}
+          onBookmarkHover={handleBookmarkHover}
+          onNavigateParent={handleNavigateParent}
+          onNavigateRoot={handleNavigateRoot}
+          onNavigatePathIndex={handleNavigatePathIndex}
+          onOpenChange={onOpenChange}
+          onNavigateUrl={onNavigate}
+          onMouseEnterPanel={cancelHoverClear}
+          renderFavicon={(title, url) => <BookmarkFavicon title={title} url={url} />}
+        />
       )}
     </div>
   );

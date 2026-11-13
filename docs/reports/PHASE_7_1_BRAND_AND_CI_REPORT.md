@@ -168,3 +168,4 @@ pnpm audit --prod               # OK (No known vulnerabilities found)
 ## 10. Publication Status Confirmation
 
 In accordance with user instructions, DECKORA has **NOT** been published or submitted to the Google Chrome Web Store. All store listing requirements, metadata, graphic assets, and permission justifications have been documented in [`docs/CHROME_WEB_STORE_PREPARATION.md`](file:///c:/Users/sanja/project/JARVIS/docs/CHROME_WEB_STORE_PREPARATION.md) so the user can review and manually submit whenever ready.
+

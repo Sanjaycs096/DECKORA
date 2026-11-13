@@ -139,3 +139,4 @@ To generate the production zip package for store upload:
      - 1400×560 Marquee Banner (`public/brand/deckora-cws-marquee-1400x560.png`)
    - Fill in Privacy Practices (Section 5 and 6 above).
    - Save as Draft and request review.
+
