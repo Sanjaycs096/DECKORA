@@ -5,49 +5,57 @@
       <stop offset="55%" stop-color="#1E2A44" />
       <stop offset="100%" stop-color="#0B1220" />
     </linearGradient>
-    <radialGradient id="cws-s-glow" cx="0.22" cy="0.25" r="0.7">
-      <stop offset="0%" stop-color="#7FD3F7" stop-opacity="0.24" />
-      <stop offset="60%" stop-color="#8B7CF6" stop-opacity="0.12" />
+    <radialGradient id="cws-s-glow" cx="0.5" cy="0.35" r="0.6">
+      <stop offset="0%" stop-color="#7FD3F7" stop-opacity="0.22" />
+      <stop offset="50%" stop-color="#8B7CF6" stop-opacity="0.1" />
       <stop offset="100%" stop-color="#0B1220" stop-opacity="0" />
     </radialGradient>
+    <linearGradient id="promo-top" x1="26" y1="24" x2="102" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#EAF4FF" />
+      <stop offset="48%" stop-color="#7FD3F7" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="promo-bot" x1="26" y1="66" x2="102" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B7CF6" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
   </defs>
+
   <rect width="440" height="280" fill="url(#cws-s-bg)" />
   <rect width="440" height="280" fill="url(#cws-s-glow)" />
-  <rect x="172" y="42" width="96" height="96" rx="24" fill="#1E2A44" stroke="#7FD3F7" stroke-opacity="0.35" stroke-width="2" />
-  <path
-    d="M204 62H224C240.569 62 253 74.0883 253 90C253 105.912 240.569 118 224 118H204V62ZM215 73V107H224C233.941 107 241 99.8 241 90C241 80.2 233.941 73 224 73H215Z"
-    fill="#8B7CF6"
-  />
-  <path
-    fill-rule="evenodd"
-    clip-rule="evenodd"
-    d="M191 58H213C231.225 58 244 71.3 244 90C244 108.7 231.225 122 213 122H191V58ZM203 70V110H213C224.046 110 232 101.4 232 90C232 78.6 224.046 70 213 70H203Z"
-    fill="#7FD3F7"
-  />
-  <circle cx="246" cy="64" r="4.5" fill="#34D399" />
+
+  <!-- Center Symbol (96x96 at x=172, y=38) -->
+  <g transform="translate(172, 38)">
+    <rect width="96" height="96" rx="24" fill="#1E2A44" stroke="#7FD3F7" stroke-opacity="0.3" stroke-width="1.8" />
+    <svg width="96" height="96" viewBox="0 0 128 128">
+      <path d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z" fill="url(#promo-top)" />
+      <path d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z" fill="url(#promo-bot)" />
+    </svg>
+  </g>
+
+  <!-- Wordmark -->
   <text
     x="220"
-    y="186"
+    y="182"
     text-anchor="middle"
     fill="#EAF4FF"
     font-family="'Manrope Variable', 'Manrope', system-ui, sans-serif"
-    font-size="36"
+    font-size="34"
     font-weight="800"
-    letter-spacing="6"
+    letter-spacing="5.5"
   >
     DECKORA
   </text>
   <text
     x="220"
-    y="218"
+    y="212"
     text-anchor="middle"
     fill="#7FD3F7"
     font-family="'Inter Variable', system-ui, sans-serif"
-    font-size="14"
+    font-size="13.5"
     font-weight="500"
-    letter-spacing="0.6"
+    letter-spacing="1.2"
   >
     Your Personal Browser Workspace
   </text>
 </svg>
-

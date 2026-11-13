@@ -35,4 +35,3 @@ If you discover a security vulnerability or potential risk in DECKORA:
 4. Allow reasonable time for the maintainers to review, reproduce, and remediate the issue before any public disclosure.
 
 Thank you for helping keep DECKORA and its users secure.
-

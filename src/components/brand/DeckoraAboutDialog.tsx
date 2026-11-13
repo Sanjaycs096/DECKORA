@@ -42,11 +42,11 @@ export function DeckoraAboutDialog({ open, onOpenChange }: DeckoraAboutDialogPro
         <div className="mt-2 space-y-4 text-xs text-[var(--aurora-text-secondary)]">
           <div className="rounded-2xl border border-[var(--aurora-border)] bg-[var(--aurora-surface)]/45 p-3.5">
             <p className="font-semibold text-[var(--aurora-text)]">
-              Brand System — &ldquo;The Layered D&rdquo; (v0.1.0)
+              Brand System — &ldquo;The Dual Horizon Decks&rdquo; (v0.1.0)
             </p>
             <p className="mt-1 leading-relaxed">
-              Initial vector interpretation uniting layered spatial planes, negative-space geometry,
-              and restrained horizon highlights. Zero telemetry, zero external asset CDNs, and
+              Refined geometric monogram uniting interlocking workspace planes, negative-space
+              horizon channel, and clean typography. Zero telemetry, zero external asset CDNs, and
               strictly opt-in browser permissions.
             </p>
           </div>

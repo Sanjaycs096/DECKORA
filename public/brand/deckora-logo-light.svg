@@ -1,27 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 96" fill="none" role="img" aria-label="DECKORA light mode logo">
-  <rect x="6" y="8" width="80" height="80" rx="18" fill="#EAF4FF" stroke="#1E2A44" stroke-opacity="0.16" stroke-width="2" />
-  <path
-    d="M35 26H51C64.8071 26 75 35.8 75 48C75 60.2 64.8071 70 51 70H35V26ZM45 36V60H51C59.2843 60 65 54.8 65 48C65 41.2 59.2843 36 51 36H45Z"
-    fill="#8B7CF6"
-    fill-opacity="0.85"
-  />
-  <path
-    fill-rule="evenodd"
-    clip-rule="evenodd"
-    d="M23 22H42C57.464 22 68 33.2 68 48C68 62.8 57.464 74 42 74H23V22ZM33 32V64H42C51.3888 64 58 57 58 48C58 39 51.3888 32 42 32H33Z"
-    fill="#1E2A44"
-  />
-  <circle cx="69" cy="26" r="3.5" fill="#34D399" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 112" fill="none" role="img" aria-label="DECKORA light mode logo">
+  <!-- Left Symbol (96x96) -->
+  <g transform="translate(8, 8)">
+    <rect width="96" height="96" rx="22" fill="#F0F9FF" stroke="#1E2A44" stroke-opacity="0.16" stroke-width="1.8" />
+    <svg width="96" height="96" viewBox="0 0 128 128">
+      <!-- Upper Workspace Deck -->
+      <path d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z" fill="#0B1220" />
+      <!-- Lower Foundation Deck -->
+      <path d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z" fill="#38BDF8" />
+    </svg>
+  </g>
+
+  <!-- Wordmark -->
   <text
-    x="104"
-    y="59"
+    x="124"
+    y="63"
     fill="#0B1220"
     font-family="'Manrope Variable', 'Manrope', 'Inter Variable', system-ui, sans-serif"
-    font-size="34"
+    font-size="38"
     font-weight="800"
-    letter-spacing="5"
+    letter-spacing="5.5"
   >
     DECKORA
   </text>
+  <text
+    x="126"
+    y="86"
+    fill="#1E2A44"
+    font-family="'Inter Variable', 'Inter', system-ui, sans-serif"
+    font-size="12.5"
+    font-weight="500"
+    letter-spacing="1.4"
+  >
+    YOUR PERSONAL BROWSER WORKSPACE
+  </text>
 </svg>
-

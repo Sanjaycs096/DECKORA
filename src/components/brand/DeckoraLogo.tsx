@@ -48,8 +48,8 @@ export function DeckoraLogo({
   const dims = SIZE_MAP[size];
 
   const bgGradientId = `deckora-bg-${uid}`;
-  const iceGradientId = `deckora-ice-${uid}`;
-  const violetGradientId = `deckora-violet-${uid}`;
+  const topGradientId = `deckora-top-${uid}`;
+  const botGradientId = `deckora-bot-${uid}`;
 
   const wordmarkColorClass =
     tone === 'mono-white'
@@ -81,19 +81,13 @@ export function DeckoraLogo({
           className="shrink-0"
         >
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M44 30H68C88.9868 30 104 44.3269 104 64C104 83.6731 88.9868 98 68 98H44V30ZM58 44V84H68C80.1503 84 89 75.5 89 64C89 52.5 80.1503 44 68 44H58Z"
+            d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z"
             fill="#FFFFFF"
-            fillOpacity="0.38"
           />
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 24H56C78.6437 24 94 40.5655 94 64C94 87.4345 78.6437 104 56 104H28V24ZM43 39V89H56C69.2548 89 79 78.5 79 64C79 49.5 69.2548 39 56 39H43Z"
+            d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z"
             fill="#FFFFFF"
           />
-          <circle cx="96" cy="32" r="5" fill="#FFFFFF" />
         </svg>
       );
     }
@@ -109,19 +103,13 @@ export function DeckoraLogo({
           className="shrink-0"
         >
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M44 30H68C88.9868 30 104 44.3269 104 64C104 83.6731 88.9868 98 68 98H44V30ZM58 44V84H68C80.1503 84 89 75.5 89 64C89 52.5 80.1503 44 68 44H58Z"
+            d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z"
             fill="#0B1220"
-            fillOpacity="0.35"
           />
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 24H56C78.6437 24 94 40.5655 94 64C94 87.4345 78.6437 104 56 104H28V24ZM43 39V89H56C69.2548 89 79 78.5 79 64C79 49.5 69.2548 39 56 39H43Z"
+            d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z"
             fill="#0B1220"
           />
-          <circle cx="96" cy="32" r="5" fill="#0B1220" />
         </svg>
       );
     }
@@ -142,23 +130,19 @@ export function DeckoraLogo({
             width="120"
             height="120"
             rx="28"
-            fill="#EAF4FF"
+            fill="#F0F9FF"
             stroke="#1E2A44"
             strokeOpacity="0.16"
             strokeWidth="2"
           />
           <path
-            d="M44 30H68C88.9868 30 104 44.3269 104 64C104 83.6731 88.9868 98 68 98H44V30ZM58 44V84H68C80.1503 84 89 75.5 89 64C89 52.5 80.1503 44 68 44H58Z"
-            fill="#8B7CF6"
-            fillOpacity="0.85"
+            d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z"
+            fill="#0B1220"
           />
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 24H56C78.6437 24 94 40.5655 94 64C94 87.4345 78.6437 104 56 104H28V24ZM43 39V89H56C69.2548 89 79 78.5 79 64C79 49.5 69.2548 39 56 39H43Z"
-            fill="#1E2A44"
+            d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z"
+            fill="#38BDF8"
           />
-          <circle cx="96" cy="32" r="5" fill="#34D399" />
         </svg>
       );
     }
@@ -185,27 +169,27 @@ export function DeckoraLogo({
             <stop offset="100%" stopColor="#0B1220" />
           </linearGradient>
           <linearGradient
-            id={violetGradientId}
-            x1="28"
-            y1="22"
-            x2="104"
-            y2="104"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stopColor="#8B7CF6" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#5B4FD6" stopOpacity="0.85" />
-          </linearGradient>
-          <linearGradient
-            id={iceGradientId}
-            x1="24"
-            y1="20"
-            x2="96"
-            y2="108"
+            id={topGradientId}
+            x1="26"
+            y1="24"
+            x2="102"
+            y2="62"
             gradientUnits="userSpaceOnUse"
           >
             <stop offset="0%" stopColor="#EAF4FF" />
             <stop offset="48%" stopColor="#7FD3F7" />
             <stop offset="100%" stopColor="#38BDF8" />
+          </linearGradient>
+          <linearGradient
+            id={botGradientId}
+            x1="26"
+            y1="66"
+            x2="102"
+            y2="104"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#8B7CF6" />
+            <stop offset="100%" stopColor="#3B82F6" />
           </linearGradient>
         </defs>
         <rect
@@ -216,26 +200,17 @@ export function DeckoraLogo({
           rx="28"
           fill={`url(#${bgGradientId})`}
           stroke="#7FD3F7"
-          strokeOpacity="0.28"
+          strokeOpacity="0.24"
           strokeWidth="2"
         />
         <path
-          d="M44 30H68C88.9868 30 104 44.3269 104 64C104 83.6731 88.9868 98 68 98H44V30ZM58 44V84H68C80.1503 84 89 75.5 89 64C89 52.5 80.1503 44 68 44H58Z"
-          fill={`url(#${violetGradientId})`}
+          d="M26 36C26 29.3726 31.3726 24 38 24H62C84.0914 24 102 41.9086 102 62H80C80 52.0589 71.9411 44 62 44H50V62H26V36Z"
+          fill={`url(#${topGradientId})`}
         />
         <path
-          d="M36 27H61C82.5391 27 98 42.67 98 64C98 85.33 82.5391 101 61 101H36V27ZM51 42V86H61C73.7025 86 83 76.6 83 64C83 51.4 73.7025 42 61 42H51Z"
-          fill="#1E2A44"
-          fillOpacity="0.88"
+          d="M26 66H50V84H62C71.9411 84 80 75.9411 80 66H102C102 86.0914 84.0914 104 62 104H38C31.3726 104 26 98.6274 26 92V66Z"
+          fill={`url(#${botGradientId})`}
         />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M28 24H56C78.6437 24 94 40.5655 94 64C94 87.4345 78.6437 104 56 104H28V24ZM43 39V89H56C69.2548 89 79 78.5 79 64C79 49.5 69.2548 39 56 39H43Z"
-          fill={`url(#${iceGradientId})`}
-        />
-        <rect x="28" y="72" width="64" height="2.5" rx="1.25" fill="#EAF4FF" fillOpacity="0.45" />
-        <circle cx="96" cy="32" r="5" fill="#34D399" />
       </svg>
     );
   };
