@@ -1,0 +1,157 @@
+/* DECKORA Royal Crystal Design Tokens
+ * Seed Palette:
+ * - Midnight Navy: #0B1220
+ * - Royal Slate:   #1E2A44
+ * - Deep Blue:     #27395C
+ * - Ice Blue:      #7FD3F7
+ * - Violet:        #8B7CF6
+ * - Emerald:       #34D399
+ * - Ice White:     #EAF4FF
+ */
+
+:root,
+:root.dark {
+  color-scheme: dark;
+
+  --aurora-bg: #0b1220;
+  --aurora-bg-canvas: #0b1220;
+  --aurora-bg-elevated: #1e2a44;
+  --aurora-surface: rgba(30, 42, 68, 0.58);
+  --aurora-surface-elevated: rgba(39, 57, 92, 0.72);
+  --aurora-surface-solid: #1e2a44;
+
+  --aurora-menu-bg: rgba(15, 24, 42, 0.98);
+  --aurora-menu-trigger-bg: #1e2a44;
+  --aurora-menu-text: #eaf4ff;
+  --aurora-menu-text-secondary: #b3c4db;
+  --aurora-menu-hover-bg: rgba(127, 211, 247, 0.18);
+  --aurora-menu-hover-text: #ffffff;
+  --aurora-menu-selected-bg: rgba(52, 211, 153, 0.18);
+  --aurora-menu-selected-text: #34d399;
+  --aurora-menu-disabled-text: #7c8fa9;
+
+  --aurora-text: #eaf4ff;
+  --aurora-text-secondary: #b3c4db;
+  --aurora-text-muted: #7c8fa9;
+
+  --aurora-primary: #7fd3f7;
+  --aurora-primary-foreground: #0b1220;
+  --aurora-secondary: #27395c;
+  --aurora-secondary-foreground: #eaf4ff;
+  --aurora-accent: #8b7cf6;
+
+  --aurora-border: rgba(234, 244, 255, 0.14);
+  --aurora-border-highlight: rgba(127, 211, 247, 0.35);
+  --aurora-focus-ring: #7fd3f7;
+
+  --aurora-success: #34d399;
+  --aurora-warning: #fbbf24;
+  --aurora-error: #f87171;
+
+  --aurora-shadow-soft: 0 12px 32px -8px rgba(4, 9, 20, 0.48);
+  --aurora-shadow-elevated: 0 20px 48px -12px rgba(4, 9, 20, 0.68);
+
+  /* Crystal Glassmorphism Tokens */
+  --glass-opacity: 0.58;
+  --glass-bg: rgba(30, 42, 68, 0.58);
+  --glass-bg-elevated: rgba(39, 57, 92, 0.74);
+  --glass-blur: 18px;
+  --glass-saturation: 145%;
+  --glass-border-color: rgba(234, 244, 255, 0.16);
+  --glass-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --glass-radius: 20px;
+  --glass-shadow: var(--aurora-shadow-soft);
+
+  /* Motion Timing Tokens */
+  --aurora-duration-fast: 180ms;
+  --aurora-duration-panel: 240ms;
+  --aurora-duration-entrance: 280ms;
+  --aurora-ease-crystal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root.light {
+  color-scheme: light;
+
+  --aurora-bg: #eef4fa;
+  --aurora-bg-canvas: #eef4fa;
+  --aurora-bg-elevated: #ffffff;
+  --aurora-surface: rgba(255, 255, 255, 0.66);
+  --aurora-surface-elevated: rgba(241, 246, 252, 0.88);
+  --aurora-surface-solid: #ffffff;
+
+  --aurora-menu-bg: rgba(255, 255, 255, 0.98);
+  --aurora-menu-trigger-bg: #ffffff;
+  --aurora-menu-text: #0b1220;
+  --aurora-menu-text-secondary: #364968;
+  --aurora-menu-hover-bg: rgba(2, 132, 199, 0.12);
+  --aurora-menu-hover-text: #0c4a6e;
+  --aurora-menu-selected-bg: rgba(5, 150, 105, 0.14);
+  --aurora-menu-selected-text: #047857;
+  --aurora-menu-disabled-text: #94a3b8;
+
+  --aurora-text: #0b1220;
+  --aurora-text-secondary: #364968;
+  --aurora-text-muted: #64748b;
+
+  --aurora-primary: #0284c7;
+  --aurora-primary-foreground: #ffffff;
+  --aurora-secondary: #dce6f2;
+  --aurora-secondary-foreground: #0b1220;
+  --aurora-accent: #7c3aed;
+
+  --aurora-border: rgba(11, 18, 32, 0.12);
+  --aurora-border-highlight: rgba(2, 132, 199, 0.38);
+  --aurora-focus-ring: #0284c7;
+
+  --aurora-success: #059669;
+  --aurora-warning: #d97706;
+  --aurora-error: #dc2626;
+
+  --aurora-shadow-soft: 0 12px 32px -8px rgba(11, 18, 32, 0.12);
+  --aurora-shadow-elevated: 0 20px 48px -12px rgba(11, 18, 32, 0.18);
+
+  --glass-opacity: 0.66;
+  --glass-bg: rgba(255, 255, 255, 0.66);
+  --glass-bg-elevated: rgba(241, 246, 252, 0.86);
+  --glass-blur: 18px;
+  --glass-saturation: 135%;
+  --glass-border-color: rgba(11, 18, 32, 0.12);
+  --glass-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  --glass-radius: 20px;
+  --glass-shadow: var(--aurora-shadow-soft);
+}
+
+.aurora-glass {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border-color);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-inner-glow), var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+}
+
+.aurora-glass-elevated {
+  background-color: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border-color);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-inner-glow), var(--aurora-shadow-elevated);
+  backdrop-filter: blur(calc(var(--glass-blur) + 4px)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 4px)) saturate(var(--glass-saturation));
+}
+
+/* Fallback when backdrop-filter is unsupported or disabled */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .aurora-glass,
+  .aurora-glass-elevated {
+    background-color: var(--aurora-surface-solid);
+    opacity: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --aurora-duration-fast: 0ms;
+    --aurora-duration-panel: 0ms;
+    --aurora-duration-entrance: 0ms;
+  }
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 280" fill="none" role="img" aria-label="DECKORA Chrome Web Store Small Promo Tile">
+  <defs>
+    <linearGradient id="cws-s-bg" x1="0" y1="0" x2="440" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B1220" />
+      <stop offset="55%" stop-color="#1E2A44" />
+      <stop offset="100%" stop-color="#0B1220" />
+    </linearGradient>
+    <radialGradient id="cws-s-glow" cx="0.22" cy="0.25" r="0.7">
+      <stop offset="0%" stop-color="#7FD3F7" stop-opacity="0.24" />
+      <stop offset="60%" stop-color="#8B7CF6" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#0B1220" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="440" height="280" fill="url(#cws-s-bg)" />
+  <rect width="440" height="280" fill="url(#cws-s-glow)" />
+  <rect x="172" y="42" width="96" height="96" rx="24" fill="#1E2A44" stroke="#7FD3F7" stroke-opacity="0.35" stroke-width="2" />
+  <path
+    d="M204 62H224C240.569 62 253 74.0883 253 90C253 105.912 240.569 118 224 118H204V62ZM215 73V107H224C233.941 107 241 99.8 241 90C241 80.2 233.941 73 224 73H215Z"
+    fill="#8B7CF6"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M191 58H213C231.225 58 244 71.3 244 90C244 108.7 231.225 122 213 122H191V58ZM203 70V110H213C224.046 110 232 101.4 232 90C232 78.6 224.046 70 213 70H203Z"
+    fill="#7FD3F7"
+  />
+  <circle cx="246" cy="64" r="4.5" fill="#34D399" />
+  <text
+    x="220"
+    y="186"
+    text-anchor="middle"
+    fill="#EAF4FF"
+    font-family="'Manrope Variable', 'Manrope', system-ui, sans-serif"
+    font-size="36"
+    font-weight="800"
+    letter-spacing="6"
+  >
+    DECKORA
+  </text>
+  <text
+    x="220"
+    y="218"
+    text-anchor="middle"
+    fill="#7FD3F7"
+    font-family="'Inter Variable', system-ui, sans-serif"
+    font-size="14"
+    font-weight="500"
+    letter-spacing="0.6"
+  >
+    Your Personal Browser Workspace
+  </text>
+</svg>
+

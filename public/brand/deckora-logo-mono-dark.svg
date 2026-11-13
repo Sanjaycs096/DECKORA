@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" fill="none" role="img" aria-label="DECKORA monochrome dark logo">
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M34 22H52C67.464 22 78 33.1929 78 48C78 62.8071 67.464 74 52 74H34V22ZM44 32V64H52C61.3888 64 68 57.2 68 48C68 38.8 61.3888 32 52 32H44Z"
+    fill="#0B1220"
+    fill-opacity="0.35"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M20 18H40C57.6731 18 70 30.8 70 48C70 65.2 57.6731 78 40 78H20V18ZM32 29V67H40C50.4934 67 58 58.9 58 48C58 37.1 50.4934 29 40 29H32Z"
+    fill="#0B1220"
+  />
+  <circle cx="72" cy="24" r="3.5" fill="#0B1220" />
+  <text
+    x="98"
+    y="59"
+    fill="#0B1220"
+    font-family="'Manrope Variable', 'Manrope', 'Inter Variable', system-ui, sans-serif"
+    font-size="34"
+    font-weight="800"
+    letter-spacing="5"
+  >
+    DECKORA
+  </text>
+</svg>
+

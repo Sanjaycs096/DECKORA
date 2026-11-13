@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 112" fill="none" role="img" aria-label="DECKORA horizontal brand lockup">
+  <defs>
+    <linearGradient id="dl-bg" x1="8" y1="8" x2="96" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E2A44" />
+      <stop offset="100%" stop-color="#0B1220" />
+    </linearGradient>
+    <linearGradient id="dl-violet" x1="24" y1="20" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B7CF6" />
+      <stop offset="100%" stop-color="#5B4FD6" />
+    </linearGradient>
+    <linearGradient id="dl-ice" x1="20" y1="18" x2="82" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#EAF4FF" />
+      <stop offset="50%" stop-color="#7FD3F7" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="96" height="96" rx="22" fill="url(#dl-bg)" stroke="#7FD3F7" stroke-opacity="0.28" stroke-width="2" />
+  <path
+    d="M40 28H60C76.5685 28 89 40.0883 89 56C89 71.9117 76.5685 84 60 84H40V28ZM51 39V73H60C69.9411 73 77 65.8 77 56C77 46.2 69.9411 39 60 39H51Z"
+    fill="url(#dl-violet)"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M27 24H49C67.2254 24 80 37.3 80 56C80 74.7 67.2254 88 49 88H27V24ZM39 36V76H49C60.0457 76 68 67.4 68 56C68 44.6 60.0457 36 49 36H39Z"
+    fill="url(#dl-ice)"
+  />
+  <circle cx="82" cy="30" r="4" fill="#34D399" />
+  <text
+    x="124"
+    y="63"
+    fill="#EAF4FF"
+    font-family="'Manrope Variable', 'Manrope', 'Inter Variable', system-ui, sans-serif"
+    font-size="38"
+    font-weight="800"
+    letter-spacing="5.5"
+  >
+    DECKORA
+  </text>
+  <text
+    x="126"
+    y="86"
+    fill="#7FD3F7"
+    font-family="'Inter Variable', system-ui, sans-serif"
+    font-size="13"
+    font-weight="500"
+    letter-spacing="1.4"
+  >
+    YOUR PERSONAL BROWSER WORKSPACE
+  </text>
+</svg>
+

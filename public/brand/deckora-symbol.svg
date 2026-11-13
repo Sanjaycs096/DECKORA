@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" role="img" aria-label="Deckora Layered D symbol">
+  <defs>
+    <linearGradient id="deckora-bg" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E2A44" />
+      <stop offset="100%" stop-color="#0B1220" />
+    </linearGradient>
+    <linearGradient id="deckora-violet-plane" x1="28" y1="22" x2="104" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B7CF6" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#5B4FD6" stop-opacity="0.85" />
+    </linearGradient>
+    <linearGradient id="deckora-ice-plane" x1="24" y1="20" x2="96" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#EAF4FF" />
+      <stop offset="45%" stop-color="#7FD3F7" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="deckora-horizon" x1="28" y1="74" x2="100" y2="74" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7FD3F7" stop-opacity="0" />
+      <stop offset="45%" stop-color="#EAF4FF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#34D399" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#deckora-bg)" stroke="#7FD3F7" stroke-opacity="0.24" stroke-width="2" />
+  <!-- Back depth plane (Layered D offset) -->
+  <path
+    d="M44 30H68C88.9868 30 104 44.3269 104 64C104 83.6731 88.9868 98 68 98H44V30ZM58 44V84H68C80.1503 84 89 75.5 89 64C89 52.5 80.1503 44 68 44H58Z"
+    fill="url(#deckora-violet-plane)"
+  />
+  <!-- Middle slate crystal bevel -->
+  <path
+    d="M36 27H61C82.5391 27 98 42.67 98 64C98 85.33 82.5391 101 61 101H36V27ZM51 42V86H61C73.7025 86 83 76.6 83 64C83 51.4 73.7025 42 61 42H51Z"
+    fill="#1E2A44"
+    fill-opacity="0.88"
+  />
+  <!-- Foreground luminous Layered D plane -->
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M28 24H56C78.6437 24 94 40.5655 94 64C94 87.4345 78.6437 104 56 104H28V24ZM43 39V89H56C69.2548 89 79 78.5 79 64C79 49.5 69.2548 39 56 39H43Z"
+    fill="url(#deckora-ice-plane)"
+  />
+  <!-- Horizon edge highlight + Emerald precision node -->
+  <rect x="28" y="72" width="64" height="2.5" rx="1.25" fill="url(#deckora-horizon)" />
+  <circle cx="96" cy="32" r="5" fill="#34D399" />
+</svg>
+

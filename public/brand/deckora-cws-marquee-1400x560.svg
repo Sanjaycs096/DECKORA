@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" fill="none" role="img" aria-label="DECKORA Chrome Web Store Marquee Promo Banner">
+  <defs>
+    <linearGradient id="cws-m-bg" x1="0" y1="0" x2="1400" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B1220" />
+      <stop offset="50%" stop-color="#1E2A44" />
+      <stop offset="100%" stop-color="#0B1220" />
+    </linearGradient>
+    <radialGradient id="cws-m-glow1" cx="0.2" cy="0.3" r="0.55">
+      <stop offset="0%" stop-color="#7FD3F7" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#0B1220" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cws-m-glow2" cx="0.82" cy="0.68" r="0.5">
+      <stop offset="0%" stop-color="#8B7CF6" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#0B1220" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1400" height="560" fill="url(#cws-m-bg)" />
+  <rect width="1400" height="560" fill="url(#cws-m-glow1)" />
+  <rect width="1400" height="560" fill="url(#cws-m-glow2)" />
+  <rect x="130" y="160" width="220" height="220" rx="52" fill="#1E2A44" stroke="#7FD3F7" stroke-opacity="0.34" stroke-width="3" />
+  <path
+    d="M204 205H250C287.555 205 316 232.161 316 270C316 307.839 287.555 335 250 335H204V205ZM229 230V310H250C272.644 310 289 293 289 270C289 247 272.644 230 250 230H229Z"
+    fill="#8B7CF6"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M174 195H225C266.421 195 296 226 296 270C296 314 266.421 345 225 345H174V195ZM202 223V317H225C249.853 317 268 297.2 268 270C268 242.8 249.853 223 225 223H202Z"
+    fill="#7FD3F7"
+  />
+  <circle cx="300" cy="210" r="9" fill="#34D399" />
+  <text
+    x="410"
+    y="264"
+    fill="#EAF4FF"
+    font-family="'Manrope Variable', 'Manrope', system-ui, sans-serif"
+    font-size="86"
+    font-weight="800"
+    letter-spacing="12"
+  >
+    DECKORA
+  </text>
+  <text
+    x="414"
+    y="326"
+    fill="#7FD3F7"
+    font-family="'Inter Variable', system-ui, sans-serif"
+    font-size="28"
+    font-weight="500"
+    letter-spacing="1.2"
+  >
+    Your Personal Browser Workspace
+  </text>
+  <text
+    x="414"
+    y="376"
+    fill="#EAF4FF"
+    fill-opacity="0.72"
+    font-family="'Inter Variable', system-ui, sans-serif"
+    font-size="20"
+  >
+    Royal Crystal glassmorphism, custom canvas layouts, profiles &amp; offline privacy.
+  </text>
+</svg>
+

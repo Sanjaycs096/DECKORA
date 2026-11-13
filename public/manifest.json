@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "DECKORA — Your Personal Browser Workspace",
+  "short_name": "DECKORA",
+  "version": "0.1.0",
+  "description": "Your Personal Browser Workspace. A beautiful, local-first Royal Crystal New Tab extension.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "favicon",
+    "alarms"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "search"
+  ],
+  "optional_host_permissions": [
+    "https://speed.cloudflare.com/*",
+    "https://suggestqueries.google.com/*",
+    "https://duckduckgo.com/*",
+    "https://api.bing.com/*"
+  ],
+  "icons": {
+    "16": "icons/deckora-16.png",
+    "32": "icons/deckora-32.png",
+    "48": "icons/deckora-48.png",
+    "128": "icons/deckora-128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
+
